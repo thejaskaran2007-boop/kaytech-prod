@@ -353,6 +353,97 @@ export default function App() {
     );
   }
 
+  // Subpage: About Us Page
+  if (currentPage === 'about') {
+    return (
+      <div className="page-shell subpage-container">
+        <header className="subpage-header-wrap">
+          <div className="subpage-nav">
+            <button className="subpage-back" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}>
+              ← Back to Home
+            </button>
+            <div className="nav-links">
+              <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
+              <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
+              <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+            </div>
+          </div>
+          <div className="subpage-title-grid">
+            <div>
+              <p className="eyebrow">About Us</p>
+              <h1>Seasoned hands, clean handovers.</h1>
+            </div>
+            <p>
+              Founded on over 30 years of site leadership, Kaytech combines structured project engineering with field discipline to deliver premium campuses, commercial facilities, and residential builds across Tamil Nadu.
+            </p>
+          </div>
+        </header>
+
+        <main className="subpage-content about-page-content">
+          <section className="about-details-grid">
+            <div className="about-column">
+              <span className="section-divider-label">01 / Our Story</span>
+              <h2>New company, deep roots.</h2>
+              <p>
+                Kaytech Constructions was established in 2023 in Chennai to unify decades of contractor-side expertise under a single, highly agile delivery model. Unlike corporate builders who coordinate from remote offices, our engineers live on-site, guiding key civil, structural, and finishing decisions directly.
+              </p>
+              <p>
+                From school campuses completed ahead of schedule to premium private residences, our portfolio is a record of builds that stand up to daily operational wear.
+              </p>
+            </div>
+
+            <div className="about-column">
+              <span className="section-divider-label">02 / Measured Proof</span>
+              <h2>Company Ledger</h2>
+              <div className="ledger about-ledger">
+                <div><span>Established</span><strong>2023</strong></div>
+                <div><span>Head office</span><strong>Chennai</strong></div>
+                <div><span>Leadership Exp</span><strong>30+ Years</strong></div>
+                <div><span>Engineers</span><strong>30+</strong></div>
+                <div><span>Field crew</span><strong>100+</strong></div>
+                <div><span>Completed Sites</span><strong>60+</strong></div>
+              </div>
+            </div>
+          </section>
+
+          <section className="vision-mission-grid">
+            <div className="vm-card">
+              <span className="vm-num">03</span>
+              <h3>Vision</h3>
+              <p>
+                To anchor communities across Tamil Nadu with enduring structures, setting new benchmarks in structural safety, speed of execution, and turnkey finish quality.
+              </p>
+            </div>
+            <div className="vm-card">
+              <span className="vm-num">04</span>
+              <h3>Mission</h3>
+              <p>
+                To put project engineers at the center of every site decision, ensuring transparent cost tracking, zero-incident safety zones, and strict architectural fidelity.
+              </p>
+            </div>
+          </section>
+
+          <section className="policy-section-wrap">
+            <div className="policy-card">
+              <span className="policy-badge">EHS Policy</span>
+              <h3>Environment, Health & Safety</h3>
+              <p>
+                We believe a clean site is a safe site. Our zero-incident policy is maintained through strict structural scaffolding checks, clear site circulation, and dedicated safety yards. For educational and public facilities, we conduct student-safe handover audits before academic operations begin.
+              </p>
+            </div>
+            <div className="policy-card">
+              <span className="policy-badge">Quality Policy</span>
+              <h3>Finishes & Durability</h3>
+              <p>
+                Quality is not an inspect-at-the-end checklist—it is integrated into every blockwork joint, waterproofing layer, and electrical conduit. We source only graded aggregates, select premium architectural fixtures, and verify durability tolerances at every construction milestone.
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
   // Subpage: Commercial Page
   if (currentPage === 'commercial') {
     return (
@@ -363,6 +454,7 @@ export default function App() {
               ← Back to Home
             </button>
             <div className="nav-links">
+              <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
               <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
               <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
             </div>
@@ -413,6 +505,7 @@ export default function App() {
               ← Back to Home
             </button>
             <div className="nav-links">
+              <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
               <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
               <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
             </div>
@@ -495,6 +588,7 @@ export default function App() {
             <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
           </a>
           <div className="nav-links">
+            <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
             <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
             <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
             <a href="#method">Method</a>
@@ -646,6 +740,9 @@ export default function App() {
             <p>
               Kaytech Constructions was established in 2023 in Chennai, backed by more than three decades of construction experience. The team works across Tamil Nadu on residential, commercial, educational, industrial, and customized development projects.
             </p>
+            <a href="#about" className="btn btn-secondary" style={{ marginTop: '20px', display: 'inline-flex' }} onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>
+              Explore Our Core Values & Policies
+            </a>
           </div>
           <div className="ledger">
             <div><span>Established</span><strong>2023</strong></div>

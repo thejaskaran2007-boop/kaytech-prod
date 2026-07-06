@@ -1396,6 +1396,141 @@ h3 {
   border: 1px solid rgba(243, 242, 236, 0.2);
 }
 
+/* --- About Us Page Specific Styles --- */
+.about-page-content {
+  display: grid;
+  gap: 58px;
+  margin-bottom: 4rem;
+}
+
+.about-details-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-divider-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 12px;
+}
+
+.about-column h2 {
+  font-family: Impact, sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+
+.about-column p {
+  color: var(--ash);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.about-ledger {
+  margin-top: 24px;
+}
+
+.vision-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 48px 0;
+}
+
+.vm-card {
+  position: relative;
+  padding: 34px;
+  background: white;
+  border: 1px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.vm-num {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: Impact, sans-serif;
+  font-size: 2.2rem;
+  color: rgba(24, 32, 29, 0.08);
+}
+
+.vm-card h3 {
+  font-family: Impact, sans-serif;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+  color: var(--rust);
+}
+
+.vm-card p {
+  color: var(--ash);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.policy-section-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+}
+
+.policy-card {
+  padding: 34px;
+  background: var(--steel);
+  color: var(--paper);
+  border-radius: 2px;
+  box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
+}
+
+.policy-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--lime);
+  border: 1px solid rgba(214, 255, 63, 0.3);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.policy-card h3 {
+  font-family: Impact, sans-serif;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+  color: var(--paper);
+}
+
+.policy-card p {
+  color: rgba(243, 242, 236, 0.8);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .about-details-grid,
+  .vision-mission-grid,
+  .policy-section-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
