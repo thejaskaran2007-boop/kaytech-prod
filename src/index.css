@@ -1665,6 +1665,33 @@ h3 {
   margin: 0;
 }
 
+.meeting-promise-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.meeting-promise-section h4 {
+  font-family: Impact, sans-serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin: 10px 0 6px;
+  color: var(--ink);
+}
+
+.meeting-promise-section p {
+  color: var(--ash);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.promise-badge.consultation-badge {
+  background: rgba(214, 255, 63, 0.15);
+  color: var(--rust);
+  border: 1px solid rgba(181, 82, 37, 0.2);
+}
+
 .promise-badge {
   display: inline-block;
   padding: 4px 10px;
