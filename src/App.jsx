@@ -1,5 +1,4 @@
-// Trigger Vercel Deployment
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const stats = [
   { value: '30+', label: 'years of site leadership' },
@@ -237,6 +236,72 @@ const projects = [
 
 const WEB3FORMS_ACCESS_KEY = "f217b296-c01c-4488-a482-40b9a904c40c"; // Get yours free from web3forms.com
 
+function CountUp({ value }) {
+  const [count, setCount] = useState(0);
+  const elementRef = useRef(null);
+  const hasAnimated = useRef(false);
+
+  const numericPart = parseInt(value, 10);
+  const suffix = value.toString().replace(numericPart.toString(), '');
+
+  useEffect(() => {
+    if (isNaN(numericPart)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          
+          let start = 0;
+          const end = numericPart;
+          const duration = 1500; // 1.5 seconds animation
+          const stepTime = 15;
+          const stepsCount = duration / stepTime;
+          const increment = Math.ceil(end / stepsCount);
+          
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setCount(end);
+              clearInterval(timer);
+            } else {
+              setCount(start);
+            }
+          }, stepTime);
+
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const currentEl = elementRef.current;
+    if (currentEl) {
+      observer.observe(currentEl);
+    }
+
+    return () => {
+      if (currentEl) {
+        observer.unobserve(currentEl);
+      }
+    };
+  }, [numericPart]);
+
+  if (isNaN(numericPart)) {
+    return <span>{value}</span>;
+  }
+
+  return (
+    <span ref={elementRef}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -385,12 +450,12 @@ export default function App() {
 
         <main className="subpage-content about-page-content">
           <section className="about-stats-ribbon">
-            <div><span>Established</span><strong>2023</strong></div>
-            <div><span>Head office</span><strong>Chennai</strong></div>
-            <div><span>Leadership Exp</span><strong>30+ Years</strong></div>
-            <div><span>Engineers</span><strong>30+</strong></div>
-            <div><span>Field crew</span><strong>100+</strong></div>
-            <div><span>Completed Sites</span><strong>60+</strong></div>
+            <div><span>Established</span><strong><CountUp value="2023" /></strong></div>
+            <div><span>Head office</span><strong><CountUp value="Chennai" /></strong></div>
+            <div><span>Leadership Exp</span><strong><CountUp value="30+ Years" /></strong></div>
+            <div><span>Engineers</span><strong><CountUp value="30+" /></strong></div>
+            <div><span>Field crew</span><strong><CountUp value="100+" /></strong></div>
+            <div><span>Completed Sites</span><strong><CountUp value="60+" /></strong></div>
           </section>
 
           <section className="about-details-grid">
@@ -677,7 +742,7 @@ export default function App() {
           <div className="site-board" aria-label="Kaytech project summary">
             <div className="board-rule" />
             <p className="board-label">Active measure</p>
-            <strong>30 years</strong>
+            <strong><CountUp value="30 years" /></strong>
             <span>Founder-led construction experience across Tamil Nadu</span>
           </div>
         </div>
@@ -692,7 +757,7 @@ export default function App() {
         <section className="stats-section" aria-label="Kaytech numbers">
           {stats.map((item) => (
             <div key={item.label} className="stat-card">
-              <strong>{item.value}</strong>
+              <strong><CountUp value={item.value} /></strong>
               <span>{item.label}</span>
             </div>
           ))}
