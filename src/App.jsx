@@ -680,9 +680,18 @@ export default function App() {
             <a href="tel:+919444418100">+91 94444 18100</a>
             <a href="tel:+919962718100">+91 99627 18100</a>
           </div>
-          <address className="footer-address">
+          <a
+            className="footer-address-link"
+            href="https://maps.google.com/?q=Sri+Balaji+Flats,+No.3,+Ganga+Garden+Street,+Keelkattalai,+Chennai,+Tamil+Nadu+600117"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px', flexShrink: 0 }}>
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
             Ground Floor, Sri Balaji Flats, No. 3, Ganga Garden Street, Keelkattalai, Chennai, Tamil Nadu 600117
-          </address>
+          </a>
         </div>
       </footer>
     </div>

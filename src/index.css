@@ -672,13 +672,23 @@ h3 {
   color: var(--lime);
 }
 
-.footer-address {
-  font-style: normal;
-  color: rgba(243, 242, 236, 0.6);
-  font-size: 0.92rem;
-  font-weight: 500;
+.footer-address-link {
+  display: inline-flex;
+  align-items: flex-start;
+  color: var(--lime);
+  font-weight: 850;
   line-height: 1.5;
   max-width: 600px;
+  transition: opacity 150ms ease;
+}
+
+.footer-address-link:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+.footer-address-link svg {
+  margin-top: 3px;
 }
 
 .gallery-page {
