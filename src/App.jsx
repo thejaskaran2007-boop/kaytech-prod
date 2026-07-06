@@ -364,7 +364,7 @@ export default function App() {
             </button>
             <div className="nav-links">
               <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-              <a className="nav-contact" href="mailto:kaytechr422@gmail.com">kaytech422@gmail.com</a>
+              <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
             </div>
           </div>
           <div className="subpage-title-grid">
@@ -675,9 +675,14 @@ export default function App() {
           )}
         </form>
         <div className="footer-contact">
-          <a className="footer-email" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
-          <a href="tel:+919444418100">+91 94444 18100</a>
-          <a href="tel:+919962718100">+91 99627 18100</a>
+          <div className="footer-links">
+            <a className="footer-email" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+            <a href="tel:+919444418100">+91 94444 18100</a>
+            <a href="tel:+919962718100">+91 99627 18100</a>
+          </div>
+          <address className="footer-address">
+            Ground Floor, Sri Balaji Flats, No. 3, Ganga Garden Street, Keelkattalai, Chennai, Tamil Nadu 600117
+          </address>
         </div>
       </footer>
     </div>
