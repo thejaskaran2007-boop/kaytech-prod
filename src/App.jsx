@@ -595,7 +595,6 @@ export default function App() {
             <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
             <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
             <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-            <a href="#method">Method</a>
             <a href="#contact">Contact</a>
           </div>
         </nav>
