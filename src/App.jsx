@@ -836,7 +836,7 @@ export default function App() {
             <p>
               Kaytech Constructions was established in 2023 in Chennai, backed by more than three decades of construction experience. The team works across Tamil Nadu on residential, commercial, educational, industrial, and customized development projects.
             </p>
-            <a href="#about" className="btn btn-secondary" style={{ marginTop: '20px', display: 'inline-flex' }} onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>
+            <a href="#about" className="btn btn-primary" style={{ marginTop: '20px', display: 'inline-flex' }} onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>
               Explore Our Core Values & Policies
             </a>
           </div>
