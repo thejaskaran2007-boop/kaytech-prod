@@ -1404,6 +1404,13 @@ h3 {
   border: 1px solid var(--ink);
   overflow: hidden;
   box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.06);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.about-hero-image:hover {
+  transform: translateY(-6px);
+  box-shadow: 18px 18px 0 rgba(24, 32, 29, 0.08);
 }
 
 .about-hero-image img {
@@ -1430,6 +1437,15 @@ h3 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.about-stats-ribbon div:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(24, 32, 29, 0.08);
+  z-index: 1;
+  position: relative;
 }
 
 .about-stats-ribbon span {
@@ -1453,6 +1469,13 @@ h3 {
   box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
   overflow: hidden;
   display: flex;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.about-story-photo-wrap:hover {
+  transform: translateY(-6px);
+  box-shadow: 18px 18px 0 rgba(24, 32, 29, 0.12);
 }
 
 .about-story-photo {
@@ -1520,6 +1543,13 @@ h3 {
   background: white;
   border: 1px solid var(--ink);
   box-shadow: 8px 8px 0 var(--ink);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.vm-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 14px 14px 0 var(--ink);
 }
 
 .vm-num {
@@ -1558,6 +1588,13 @@ h3 {
   color: var(--paper);
   border-radius: 2px;
   box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.policy-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 18px 18px 0 rgba(24, 32, 29, 0.12);
 }
 
 .policy-badge {
