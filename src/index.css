@@ -1606,6 +1606,144 @@ h3 {
   }
 }
 
+/* --- Contact Us Page Specific Styles --- */
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.contact-form-card {
+  background: var(--steel);
+  color: var(--paper);
+  padding: 44px;
+  border: 1px solid var(--ink);
+  box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
+}
+
+.contact-form-card h2 {
+  font-family: Impact, sans-serif;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  color: var(--paper);
+}
+
+.contact-form-card p {
+  color: rgba(243, 242, 236, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+.contact-info-wrap {
+  display: grid;
+  gap: 28px;
+}
+
+.proposal-promise-box {
+  background: white;
+  padding: 34px;
+  border: 1px solid var(--ink);
+  box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
+}
+
+.proposal-promise-box h3 {
+  font-family: Impact, sans-serif;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  color: var(--rust);
+}
+
+.proposal-promise-box p {
+  color: var(--ash);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.promise-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(181, 82, 37, 0.08);
+  color: var(--rust);
+  border: 1px solid rgba(181, 82, 37, 0.2);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.contact-cards-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.info-card {
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--ink);
+}
+
+.info-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 10px;
+}
+
+.info-link {
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  display: inline-flex;
+  align-items: flex-start;
+  transition: color 150ms ease;
+  text-decoration: none;
+}
+
+.info-link:hover {
+  color: var(--rust);
+}
+
+.info-link.email-link {
+  color: var(--rust);
+}
+
+.info-link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-link-group a {
+  color: var(--ink);
+  font-weight: 850;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  transition: color 150ms ease;
+  text-decoration: none;
+}
+
+.info-link-group a:hover {
+  color: var(--rust);
+}
+
+@media (max-width: 900px) {
+  .contact-page-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   *,

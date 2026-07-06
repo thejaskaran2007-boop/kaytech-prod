@@ -365,7 +365,7 @@ export default function App() {
             <div className="nav-links">
               <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
               <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-              <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
             </div>
           </div>
           <div className="subpage-title-grid">
@@ -448,6 +448,99 @@ export default function App() {
     );
   }
 
+  // Subpage: Contact Us Page
+  if (currentPage === 'contact') {
+    return (
+      <div className="page-shell subpage-container">
+        <header className="subpage-header-wrap">
+          <div className="subpage-nav">
+            <button className="subpage-back" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}>
+              ← Back to Home
+            </button>
+            <div className="nav-links">
+              <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
+              <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
+              <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
+            </div>
+          </div>
+          <div className="subpage-title-grid">
+            <div>
+              <p className="eyebrow">Get in touch</p>
+              <h1>Start the conversation.</h1>
+            </div>
+            <p>
+              Whether you have a fully drafted architectural plan, a raw site, or just a first concept sketch, our engineers are ready to walk through the details.
+            </p>
+          </div>
+        </header>
+
+        <main className="subpage-content contact-page-content">
+          <div className="contact-page-grid">
+            {/* Left Column: Form */}
+            <div className="contact-form-card">
+              <h2>Submit Enquiry</h2>
+              <p>Fill out the fields below and our engineering team will reach out to request your drawings or schedule a call.</p>
+              <form className="contact-form" onSubmit={(e) => handleSubmitForm(e, 'footer')}>
+                <input type="text" name="name" placeholder="Your name" aria-label="Your name" required />
+                <input type="email" name="email" placeholder="Email address" aria-label="Email address" required />
+                <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
+                <textarea name="message" placeholder="Describe your project (site location, estimated build-up area, scope, or deadlines)..." aria-label="Project details" rows="4" style={{ width: '100%', minHeight: '120px', padding: '12px 14px', border: '1px solid rgba(243, 242, 236, 0.34)', borderRadius: '2px', background: 'rgba(255, 255, 255, 0.06)', color: 'var(--paper)', font: 'inherit', resize: 'vertical' }} required></textarea>
+                <button type="submit" className="btn btn-primary" disabled={footerFormStatus.state === 'submitting'}>
+                  {footerFormStatus.state === 'submitting' ? 'Sending...' : 'Request a call'}
+                </button>
+                {footerFormStatus.message && (
+                  <p className={`form-feedback ${footerFormStatus.state}`}>
+                    {footerFormStatus.message}
+                  </p>
+                )}
+              </form>
+            </div>
+
+            {/* Right Column: Info Cards & BOQ Promise */}
+            <div className="contact-info-wrap">
+              <div className="proposal-promise-box">
+                <span className="promise-badge">Kaytech Promise</span>
+                <h3>BOQ & Proposal in 72 Hours</h3>
+                <p>Send us your architectural drawings and site specifications, and our engineering desk will deliver a detailed Bill of Quantities (BOQ) and cost proposal within 72 hours.</p>
+              </div>
+
+              <div className="contact-cards-grid">
+                <div className="info-card">
+                  <span className="info-label">Office Address</span>
+                  <a
+                    className="info-link"
+                    href="https://maps.google.com/?q=Ground+Floor,+Sri+balaji+flats,+No.3,+Ganga+Garden,+Street,+Keelkattalai,+Chennai,+Tamil+Nadu+600117"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px', flexShrink: 0, verticalAlign: 'middle' }}>
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Ground Floor, Sri balaji flats, No.3, Ganga Garden, Street, Keelkattalai, Chennai, Tamil Nadu 600117
+                  </a>
+                </div>
+
+                <div className="info-card">
+                  <span className="info-label">Direct Lines</span>
+                  <div className="info-link-group">
+                    <a href="tel:+919444418100">+91 94444 18100</a>
+                    <a href="tel:+919962718100">+91 99627 18100</a>
+                  </div>
+                </div>
+
+                <div className="info-card">
+                  <span className="info-label">Email Address</span>
+                  <a className="info-link email-link" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   // Subpage: Commercial Page
   if (currentPage === 'commercial') {
     return (
@@ -460,7 +553,7 @@ export default function App() {
             <div className="nav-links">
               <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
               <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-              <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
             </div>
           </div>
           <div className="subpage-title-grid">
@@ -511,7 +604,7 @@ export default function App() {
             <div className="nav-links">
               <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
               <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
-              <a className="nav-contact" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
             </div>
           </div>
           <div className="subpage-title-grid">
@@ -595,7 +688,7 @@ export default function App() {
             <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
             <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
             <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
           </div>
         </nav>
 
@@ -608,7 +701,7 @@ export default function App() {
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#work">View project proof</a>
-              <a className="btn btn-secondary" href="#contact">Start a build</a>
+              <a className="btn btn-secondary" href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Start a build</a>
             </div>
           </div>
 
