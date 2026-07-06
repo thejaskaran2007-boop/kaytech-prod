@@ -682,7 +682,7 @@ export default function App() {
           </div>
           <a
             className="footer-address-link"
-            href="https://maps.google.com/?q=Sri+Balaji+Flats,+No.3,+Ganga+Garden+Street,+Keelkattalai,+Chennai,+Tamil+Nadu+600117"
+            href="https://maps.google.com/?q=Ground+Floor,+Sri+balaji+flats,+No.3,+Ganga+Garden,+Street,+Keelkattalai,+Chennai,+Tamil+Nadu+600117"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -690,7 +690,7 @@ export default function App() {
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
-            Ground Floor, Sri Balaji Flats, No. 3, Ganga Garden Street, Keelkattalai, Chennai, Tamil Nadu 600117
+            Ground Floor, Sri balaji flats, No.3, Ganga Garden, Street, Keelkattalai, Chennai, Tamil Nadu 600117
           </a>
         </div>
       </footer>
