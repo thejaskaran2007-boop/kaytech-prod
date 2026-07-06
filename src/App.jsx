@@ -264,7 +264,7 @@ export default function App() {
     }
     if (!data.message) {
       data.message = formType === 'footer'
-        ? `Request a call from ${data.name || 'Anonymous'}.`
+        ? `Request a call from ${data.name || 'Anonymous'}. Phone: ${data.phone || 'Not provided'}.`
         : `Request early layouts for Residential pipeline.`;
     }
 
@@ -765,6 +765,7 @@ export default function App() {
         <form className="contact-form" onSubmit={(e) => handleSubmitForm(e, 'footer')}>
           <input type="text" name="name" placeholder="Your name" aria-label="Your name" required />
           <input type="email" name="email" placeholder="Email address" aria-label="Email address" required />
+          <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
           <button type="submit" className="btn btn-primary" disabled={footerFormStatus.state === 'submitting'}>
             {footerFormStatus.state === 'submitting' ? 'Sending...' : 'Request a call'}
           </button>
