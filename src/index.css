@@ -1397,6 +1397,71 @@ h3 {
 }
 
 /* --- About Us Page Specific Styles --- */
+.about-hero-image {
+  width: min(1220px, 100%);
+  margin: 0 auto 34px;
+  height: clamp(260px, 35vh, 460px);
+  border: 1px solid var(--ink);
+  overflow: hidden;
+  box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.06);
+}
+
+.about-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-stats-ribbon {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--ink);
+  box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
+  margin-bottom: 24px;
+}
+
+.about-stats-ribbon div {
+  background: white;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-stats-ribbon span {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 8px;
+}
+
+.about-stats-ribbon strong {
+  font-family: Impact, sans-serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  color: var(--rust);
+  line-height: 1;
+}
+
+.about-story-photo-wrap {
+  border: 1px solid var(--ink);
+  box-shadow: 12px 12px 0 rgba(24, 32, 29, 0.08);
+  overflow: hidden;
+  display: flex;
+}
+
+.about-story-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 280px;
+}
+
 .about-page-content {
   display: grid;
   gap: 58px;
@@ -1528,6 +1593,16 @@ h3 {
   .vision-mission-grid,
   .policy-section-wrap {
     grid-template-columns: 1fr;
+  }
+
+  .about-stats-ribbon {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .about-stats-ribbon {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

@@ -379,7 +379,20 @@ export default function App() {
           </div>
         </header>
 
+        <div className="about-hero-image">
+          <img src="/gallery/about-concrete.jpg" alt="Active structural concrete slab casting site" />
+        </div>
+
         <main className="subpage-content about-page-content">
+          <section className="about-stats-ribbon">
+            <div><span>Established</span><strong>2023</strong></div>
+            <div><span>Head office</span><strong>Chennai</strong></div>
+            <div><span>Leadership Exp</span><strong>30+ Years</strong></div>
+            <div><span>Engineers</span><strong>30+</strong></div>
+            <div><span>Field crew</span><strong>100+</strong></div>
+            <div><span>Completed Sites</span><strong>60+</strong></div>
+          </section>
+
           <section className="about-details-grid">
             <div className="about-column">
               <span className="section-divider-label">01 / Our Story</span>
@@ -392,17 +405,8 @@ export default function App() {
               </p>
             </div>
 
-            <div className="about-column">
-              <span className="section-divider-label">02 / Measured Proof</span>
-              <h2>Company Ledger</h2>
-              <div className="ledger about-ledger">
-                <div><span>Established</span><strong>2023</strong></div>
-                <div><span>Head office</span><strong>Chennai</strong></div>
-                <div><span>Leadership Exp</span><strong>30+ Years</strong></div>
-                <div><span>Engineers</span><strong>30+</strong></div>
-                <div><span>Field crew</span><strong>100+</strong></div>
-                <div><span>Completed Sites</span><strong>60+</strong></div>
-              </div>
+            <div className="about-column about-story-photo-wrap">
+              <img src="/gallery/about-masonry.jpg" alt="Active site masonry and bricklaying work by Kaytech crew" className="about-story-photo" />
             </div>
           </section>
 
