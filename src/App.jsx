@@ -921,6 +921,9 @@ export default function App() {
             Ground Floor, Sri balaji flats, No.3, Ganga Garden, Street, Keelkattalai, Chennai, Tamil Nadu 600117
           </a>
         </div>
+        <div className="footer-copyright">
+          <p>© 2026 Kaytech Constructions. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );

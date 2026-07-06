@@ -1771,6 +1771,20 @@ h3 {
   }
 }
 
+.footer-copyright {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(243, 242, 236, 0.1);
+  margin-top: 48px;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.footer-copyright p {
+  color: rgba(243, 242, 236, 0.4);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
