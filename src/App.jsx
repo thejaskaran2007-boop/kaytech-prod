@@ -639,38 +639,7 @@ export default function App() {
             ))}
           </div>
 
-          <section className="coming-soon-residential">
-            <div className="coming-soon-info">
-              <span className="coming-soon-badge">Pipeline Status</span>
-              <h2>Residential pipeline opening soon</h2>
-              <p>
-                We are currently in the planning and pre-construction stages for several premium residential sites in Chennai and Coimbatore. Detailed architectural drawings, plot options, and villa handovers will be published here.
-              </p>
-
-              <div className="residential-inquiry-box">
-                <h3>Request early layouts</h3>
-                <p>Sign up to receive early brochures, floor plans, and priority booking details before the official launch.</p>
-                <form className="inquiry-inline-form" onSubmit={(e) => handleSubmitForm(e, 'residential')}>
-                  <input type="email" name="email" placeholder="Enter your email address" required aria-label="Email address for notification" />
-                  <button type="submit" disabled={residentialFormStatus.state === 'submitting'}>
-                    {residentialFormStatus.state === 'submitting' ? '...' : 'Submit'}
-                  </button>
-                </form>
-                {residentialFormStatus.message && (
-                  <p className={`form-feedback ${residentialFormStatus.state}`}>
-                    {residentialFormStatus.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="coming-soon-visual">
-              <div className="blueprint-grid"></div>
-              <div className="blueprint-circle">
-                <span className="blueprint-text">IN DESIGN</span>
-              </div>
-            </div>
-          </section>
+          
         </main>
       </div>
     );
