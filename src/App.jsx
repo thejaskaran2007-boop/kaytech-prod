@@ -305,6 +305,13 @@ function CountUp({ value }) {
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navigateTo = (page) => {
+    setCurrentPage(page);
+    setMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
 
   const [footerFormStatus, setFooterFormStatus] = useState({ state: 'idle', message: '' });
   const [residentialFormStatus, setResidentialFormStatus] = useState({ state: 'idle', message: '' });
@@ -424,14 +431,24 @@ export default function App() {
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
           <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}>
+            <button className="subpage-back" onClick={() => navigateTo('home')}>
               ← Back to Home
             </button>
-            <div className="nav-links">
-              <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
-              <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
+            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
+              <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
+              <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
             </div>
+            <button 
+              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
+              </span>
+            </button>
           </div>
           <div className="subpage-title-grid">
             <div>
@@ -519,14 +536,24 @@ export default function App() {
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
           <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}>
+            <button className="subpage-back" onClick={() => navigateTo('home')}>
               ← Back to Home
             </button>
-            <div className="nav-links">
-              <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
-              <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
-              <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
+            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
+              <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
+              <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
+              <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
             </div>
+            <button 
+              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
+              </span>
+            </button>
           </div>
           <div className="subpage-title-grid">
             <div>
@@ -612,14 +639,24 @@ export default function App() {
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
           <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}>
+            <button className="subpage-back" onClick={() => navigateTo('home')}>
               ← Back to Home
             </button>
-            <div className="nav-links">
-              <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
-              <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
+            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
+              <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
+              <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
             </div>
+            <button 
+              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
+              </span>
+            </button>
           </div>
           <div className="subpage-title-grid">
             <div>
@@ -663,14 +700,24 @@ export default function App() {
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
           <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}>
+            <button className="subpage-back" onClick={() => navigateTo('home')}>
               ← Back to Home
             </button>
-            <div className="nav-links">
-              <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
-              <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
+            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
+              <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
+              <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
             </div>
+            <button 
+              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
+              </span>
+            </button>
           </div>
           <div className="subpage-title-grid">
             <div>
@@ -718,12 +765,22 @@ export default function App() {
           <a className="brand" href="#top" aria-label="Kaytech home">
             <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
           </a>
-          <div className="nav-links">
-            <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>About Us</a>
-            <a href="#commercial" onClick={(e) => { e.preventDefault(); setCurrentPage('commercial'); window.scrollTo(0, 0); }}>Commercial</a>
-            <a href="#residential" onClick={(e) => { e.preventDefault(); setCurrentPage('residential'); window.scrollTo(0, 0); }}>Residential</a>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Contact</a>
+          <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
+            <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
+            <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
+            <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
           </div>
+          <button 
+            className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <span className="hamburger-box">
+              <span className="hamburger-inner"></span>
+            </span>
+          </button>
         </nav>
 
         <div className="hero-grid" id="top">
@@ -735,7 +792,7 @@ export default function App() {
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#work">View project proof</a>
-              <a className="btn btn-secondary" href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0, 0); }}>Start a build</a>
+              <a className="btn btn-secondary" href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Start a build</a>
             </div>
           </div>
 
@@ -806,7 +863,7 @@ export default function App() {
 
           <div className="portals-grid">
             {/* Commercial Portal Card */}
-            <article className="portal-card" onClick={() => { setCurrentPage('commercial'); window.scrollTo(0, 0); }}>
+            <article className="portal-card" onClick={() => navigateTo('commercial')}>
               <div className="portal-card-bg">COM</div>
               <div className="portal-header">
                 <p className="eyebrow">Division 01</p>
@@ -834,7 +891,7 @@ export default function App() {
             </article>
 
             {/* Residential Portal Card */}
-            <article className="portal-card residential-portal" onClick={() => { setCurrentPage('residential'); window.scrollTo(0, 0); }}>
+            <article className="portal-card residential-portal" onClick={() => navigateTo('residential')}>
               <div className="portal-card-bg">RES</div>
               <div className="portal-header">
                 <p className="eyebrow">Division 02</p>
@@ -870,7 +927,7 @@ export default function App() {
             <p>
               Kaytech Constructions was established in 2023 in Chennai, backed by more than three decades of construction experience. The team works across Tamil Nadu on residential, commercial, educational, industrial, and customized development projects.
             </p>
-            <a href="#about" className="btn btn-primary" style={{ marginTop: '20px', display: 'inline-flex' }} onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0, 0); }}>
+            <a href="#about" className="btn btn-primary" style={{ marginTop: '20px', display: 'inline-flex' }} onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>
               Explore Our Core Values & Policies
             </a>
           </div>
