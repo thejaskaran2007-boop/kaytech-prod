@@ -499,14 +499,9 @@ export default function App() {
             {/* Right Column: Info Cards & BOQ Promise */}
             <div className="contact-info-wrap">
               <div className="proposal-promise-box">
-                <span className="promise-badge">Kaytech Promise</span>
-                <h3>BOQ & Proposal in 72 Hours</h3>
-                <p>Send us your architectural drawings and site specifications, and our engineering desk will deliver a detailed Bill of Quantities (BOQ) and cost proposal within 72 hours.</p>
-                <div className="meeting-promise-section">
-                  <span className="promise-badge consultation-badge">Consultation</span>
-                  <h4>One-on-One Alignment</h4>
-                  <p>If you schedule a one-on-one meeting with our engineering team, we will map out a step-up plan, draft layout drawings, and clear all of your project doubts on the spot.</p>
-                </div>
+                <span className="promise-badge consultation-badge">Consultation</span>
+                <h3>One-on-One Alignment</h3>
+                <p>If you schedule a one-on-one meeting with our engineering team, we will map out a step-up plan, draft layout drawings, and clear all of your project doubts on the spot.</p>
               </div>
 
               <div className="contact-cards-grid">
