@@ -1869,9 +1869,16 @@ h3 {
   .hamburger-inner::after {
     width: 24px;
     height: 2px;
-    background-color: var(--ink);
+    background-color: var(--paper);
     position: absolute;
     transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  /* On subpages (light background), use dark hamburger lines */
+  .subpage-nav .hamburger-inner,
+  .subpage-nav .hamburger-inner::before,
+  .subpage-nav .hamburger-inner::after {
+    background-color: var(--ink);
   }
 
   .hamburger-inner {
@@ -1933,6 +1940,11 @@ h3 {
     display: block;
     width: 100%;
     text-align: center;
+    color: var(--ink);
+  }
+
+  .nav-links a:hover {
+    color: var(--rust);
   }
 
   /* Subpage Navigation Drawer Override */
@@ -1950,6 +1962,14 @@ h3 {
     z-index: 99;
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .subpage-nav .nav-links a {
+    color: var(--ink);
+  }
+
+  .subpage-nav .nav-links a:hover {
+    color: var(--rust);
   }
 
   .subpage-nav .nav-links.is-open {
