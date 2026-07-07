@@ -308,13 +308,19 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeLightboxImage, setActiveLightboxImage] = useState(null);
+  const [lightbox, setLightbox] = useState(null); // { images: [], index: 0 }
+  const touchStartX = useRef(null);
+
+  const openLightbox = (images, index) => setLightbox({ images, index });
+  const closeLightbox = () => setLightbox(null);
+  const lightboxNext = () => setLightbox(prev => prev && prev.images.length > 1 ? { ...prev, index: (prev.index + 1) % prev.images.length } : prev);
+  const lightboxPrev = () => setLightbox(prev => prev && prev.images.length > 1 ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : prev);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setActiveLightboxImage(null);
-      }
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') lightboxNext();
+      if (e.key === 'ArrowLeft') lightboxPrev();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -323,7 +329,7 @@ export default function App() {
   const navigateTo = (page) => {
     setCurrentPage(page);
     setMobileMenuOpen(false);
-    setActiveLightboxImage(null);
+    setLightbox(null);
     window.scrollTo(0, 0);
   };
 
@@ -411,7 +417,7 @@ export default function App() {
                   src={image} 
                   alt={`${selectedProject.title} view ${index + 1}`} 
                   className="lightbox-trigger"
-                  onClick={() => setActiveLightboxImage(image)}
+                  onClick={() => openLightbox(selectedProject.gallery, index)}
                 />
               </figure>
             ))}
@@ -441,18 +447,31 @@ export default function App() {
           </aside>
         </main>
 
-        {activeLightboxImage && (
-          <div className="lightbox-overlay" onClick={() => setActiveLightboxImage(null)}>
-            <button 
-              className="lightbox-close" 
-              onClick={() => setActiveLightboxImage(null)} 
-              aria-label="Close image lightbox"
-            >
-              &times;
-            </button>
+        {lightbox && (
+          <div
+            className="lightbox-overlay"
+            onClick={closeLightbox}
+            onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+            onTouchEnd={(e) => {
+              if (touchStartX.current === null) return;
+              const diff = touchStartX.current - e.changedTouches[0].clientX;
+              if (Math.abs(diff) > 50) { diff > 0 ? lightboxNext() : lightboxPrev(); }
+              touchStartX.current = null;
+            }}
+          >
+            <button className="lightbox-close" onClick={closeLightbox} aria-label="Close">&times;</button>
+            {lightbox.images.length > 1 && (
+              <button className="lightbox-arrow lightbox-arrow-prev" onClick={(e) => { e.stopPropagation(); lightboxPrev(); }} aria-label="Previous image">&#8249;</button>
+            )}
             <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <img src={activeLightboxImage} alt="Expanded view" />
+              <img src={lightbox.images[lightbox.index]} alt={`View ${lightbox.index + 1}`} />
             </div>
+            {lightbox.images.length > 1 && (
+              <button className="lightbox-arrow lightbox-arrow-next" onClick={(e) => { e.stopPropagation(); lightboxNext(); }} aria-label="Next image">&#8250;</button>
+            )}
+            {lightbox.images.length > 1 && (
+              <div className="lightbox-counter">{lightbox.index + 1} / {lightbox.images.length}</div>
+            )}
           </div>
         )}
       </div>
@@ -500,7 +519,7 @@ export default function App() {
             src="/gallery/about-concrete.jpg" 
             alt="Active structural concrete slab casting site" 
             className="lightbox-trigger"
-            onClick={() => setActiveLightboxImage("/gallery/about-concrete.jpg")}
+            onClick={() => openLightbox(["/gallery/about-concrete.jpg", "/gallery/about-masonry.jpg"], 0)}
           />
         </div>
 
@@ -531,7 +550,7 @@ export default function App() {
                 src="/gallery/about-masonry.jpg" 
                 alt="Active site masonry and bricklaying work by Kaytech crew" 
                 className="about-story-photo lightbox-trigger" 
-                onClick={() => setActiveLightboxImage("/gallery/about-masonry.jpg")}
+                onClick={() => openLightbox(["/gallery/about-concrete.jpg", "/gallery/about-masonry.jpg"], 1)}
               />
             </div>
           </section>
@@ -571,18 +590,31 @@ export default function App() {
           </section>
         </main>
 
-        {activeLightboxImage && (
-          <div className="lightbox-overlay" onClick={() => setActiveLightboxImage(null)}>
-            <button 
-              className="lightbox-close" 
-              onClick={() => setActiveLightboxImage(null)} 
-              aria-label="Close image lightbox"
-            >
-              &times;
-            </button>
+        {lightbox && (
+          <div
+            className="lightbox-overlay"
+            onClick={closeLightbox}
+            onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+            onTouchEnd={(e) => {
+              if (touchStartX.current === null) return;
+              const diff = touchStartX.current - e.changedTouches[0].clientX;
+              if (Math.abs(diff) > 50) { diff > 0 ? lightboxNext() : lightboxPrev(); }
+              touchStartX.current = null;
+            }}
+          >
+            <button className="lightbox-close" onClick={closeLightbox} aria-label="Close">&times;</button>
+            {lightbox.images.length > 1 && (
+              <button className="lightbox-arrow lightbox-arrow-prev" onClick={(e) => { e.stopPropagation(); lightboxPrev(); }} aria-label="Previous image">&#8249;</button>
+            )}
             <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <img src={activeLightboxImage} alt="Expanded view" />
+              <img src={lightbox.images[lightbox.index]} alt={`View ${lightbox.index + 1}`} />
             </div>
+            {lightbox.images.length > 1 && (
+              <button className="lightbox-arrow lightbox-arrow-next" onClick={(e) => { e.stopPropagation(); lightboxNext(); }} aria-label="Next image">&#8250;</button>
+            )}
+            {lightbox.images.length > 1 && (
+              <div className="lightbox-counter">{lightbox.index + 1} / {lightbox.images.length}</div>
+            )}
           </div>
         )}
       </div>
@@ -868,13 +900,13 @@ export default function App() {
             src="/gallery/front.jpg.png" 
             alt="Sri Chaitanya Techno School front elevation" 
             className="lightbox-trigger"
-            onClick={() => setActiveLightboxImage("/gallery/front.jpg.png")}
+            onClick={() => openLightbox(["/gallery/front.jpg.png", "/gallery/outside.png"], 0)}
           />
           <img 
             src="/gallery/outside.png" 
             alt="School campus entrance with steel canopy" 
             className="lightbox-trigger"
-            onClick={() => setActiveLightboxImage("/gallery/outside.png")}
+            onClick={() => openLightbox(["/gallery/front.jpg.png", "/gallery/outside.png"], 1)}
           />
         </div>
       </header>
@@ -1052,18 +1084,31 @@ export default function App() {
         </div>
       </footer>
 
-      {activeLightboxImage && (
-        <div className="lightbox-overlay" onClick={() => setActiveLightboxImage(null)}>
-          <button 
-            className="lightbox-close" 
-            onClick={() => setActiveLightboxImage(null)} 
-            aria-label="Close image lightbox"
-          >
-            &times;
-          </button>
+      {lightbox && (
+        <div
+          className="lightbox-overlay"
+          onClick={closeLightbox}
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const diff = touchStartX.current - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) { diff > 0 ? lightboxNext() : lightboxPrev(); }
+            touchStartX.current = null;
+          }}
+        >
+          <button className="lightbox-close" onClick={closeLightbox} aria-label="Close">&times;</button>
+          {lightbox.images.length > 1 && (
+            <button className="lightbox-arrow lightbox-arrow-prev" onClick={(e) => { e.stopPropagation(); lightboxPrev(); }} aria-label="Previous image">&#8249;</button>
+          )}
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img src={activeLightboxImage} alt="Expanded view" />
+            <img src={lightbox.images[lightbox.index]} alt={`View ${lightbox.index + 1}`} />
           </div>
+          {lightbox.images.length > 1 && (
+            <button className="lightbox-arrow lightbox-arrow-next" onClick={(e) => { e.stopPropagation(); lightboxNext(); }} aria-label="Next image">&#8250;</button>
+          )}
+          {lightbox.images.length > 1 && (
+            <div className="lightbox-counter">{lightbox.index + 1} / {lightbox.images.length}</div>
+          )}
         </div>
       )}
     </div>
