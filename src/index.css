@@ -2256,8 +2256,6 @@ h3 {
   }
 }
 
-}
-
 @keyframes scaleIn {
   from { transform: scale(0.93); opacity: 0; }
   to   { transform: scale(1);    opacity: 1; }
