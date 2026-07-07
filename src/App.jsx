@@ -503,6 +503,7 @@ export default function App() {
               </span>
             </button>
           </div>
+          {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid">
             <div>
               <p className="eyebrow">About Us</p>
@@ -646,6 +647,7 @@ export default function App() {
               </span>
             </button>
           </div>
+          {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid">
             <div>
               <p className="eyebrow">Get in touch</p>
@@ -749,6 +751,7 @@ export default function App() {
               </span>
             </button>
           </div>
+          {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid">
             <div>
               <p className="eyebrow">Division: Commercial & Institutional</p>
@@ -810,6 +813,7 @@ export default function App() {
               </span>
             </button>
           </div>
+          {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid">
             <div>
               <p className="eyebrow">Division: Residential Builds</p>
@@ -873,6 +877,7 @@ export default function App() {
             </span>
           </button>
         </nav>
+        {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
 
         <div className="hero-grid" id="top">
           <div className="hero-copy-block">

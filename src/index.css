@@ -1867,11 +1867,12 @@ h3 {
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    width: 24px;
-    height: 2px;
+    width: 26px;
+    height: 2.5px;
     background-color: var(--paper);
     position: absolute;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    border-radius: 2px;
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s ease, background-color 0.2s ease;
   }
 
   /* On subpages (light background), use dark hamburger lines */
@@ -1896,35 +1897,75 @@ h3 {
     bottom: -8px;
   }
 
-  /* Active Hamburger Animation */
+  /* Active Hamburger → X morph */
   .mobile-menu-toggle.is-active .hamburger-inner {
     background-color: transparent;
+    transform: translateY(-50%) scaleX(0);
+    opacity: 0;
   }
 
   .mobile-menu-toggle.is-active .hamburger-inner::before {
-    transform: translateY(8px) rotate(45deg);
+    top: 0;
+    transform: rotate(45deg);
+    background-color: var(--paper);
   }
 
   .mobile-menu-toggle.is-active .hamburger-inner::after {
-    transform: translateY(-8px) rotate(-45deg);
+    top: 0;
+    transform: rotate(-45deg);
+    background-color: var(--paper);
   }
 
-  /* Fixed Navigation Drawer Overlay */
+  .subpage-nav .mobile-menu-toggle.is-active .hamburger-inner::before,
+  .subpage-nav .mobile-menu-toggle.is-active .hamburger-inner::after {
+    background-color: var(--ink);
+  }
+
+  /* === PREMIUM DARK MOBILE NAV DRAWER === */
   .nav-links {
     position: fixed;
     top: 0;
     right: 0;
-    width: 100%;
+    width: 82vw;
+    max-width: 340px;
     height: 100vh;
-    background: var(--paper);
+    background: var(--ink);
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    gap: 34px;
-    z-index: 99;
+    padding: 60px 36px 48px;
+    gap: 0;
+    z-index: 100;
     transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: -10px 0 30px rgba(24, 32, 29, 0.05);
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.4);
+    counter-reset: nav-item;
+    overflow: hidden;
+  }
+
+  /* Decorative brand wordmark at top of drawer */
+  .nav-links::before {
+    content: "KAYTECH";
+    position: absolute;
+    top: 24px;
+    left: 36px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: rgba(243, 242, 236, 0.25);
+    pointer-events: none;
+  }
+
+  /* Decorative lime accent bar */
+  .nav-links::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--lime), transparent 70%);
+    opacity: 0.7;
   }
 
   .nav-links.is-open {
@@ -1932,48 +1973,108 @@ h3 {
   }
 
   .nav-links a {
-    font-size: 1.5rem;
-    font-weight: 850;
+    font-size: 1.65rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 12px 24px;
-    display: block;
+    letter-spacing: 0.04em;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
     width: 100%;
-    text-align: center;
-    color: var(--ink);
+    text-align: left;
+    color: rgba(243, 242, 236, 0.82);
+    border-bottom: 1px solid rgba(243, 242, 236, 0.07);
+    counter-increment: nav-item;
+    transition: color 0.2s ease, gap 0.2s ease;
+    position: relative;
+  }
+
+  /* Number prefix */
+  .nav-links a::before {
+    content: counter(nav-item, decimal-leading-zero);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--lime);
+    opacity: 0.8;
+    min-width: 22px;
+    align-self: center;
+    margin-top: 2px;
   }
 
   .nav-links a:hover {
-    color: var(--rust);
+    color: var(--paper);
+    gap: 20px;
   }
 
-  /* Subpage Navigation Drawer Override */
+  .nav-links a:hover::before {
+    opacity: 1;
+  }
+
+  /* === SUBPAGE DRAWER (same dark design) === */
   .subpage-nav .nav-links {
     position: fixed;
     top: 0;
     right: 0;
-    width: 100%;
+    width: 82vw;
+    max-width: 340px;
     height: 100vh;
-    background: var(--paper);
+    background: var(--ink);
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    gap: 34px;
-    z-index: 99;
+    padding: 60px 36px 48px;
+    gap: 0;
+    z-index: 100;
     transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.4);
+    counter-reset: nav-item;
   }
 
   .subpage-nav .nav-links a {
-    color: var(--ink);
+    color: rgba(243, 242, 236, 0.82);
+    font-size: 1.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(243, 242, 236, 0.07);
+    counter-increment: nav-item;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .subpage-nav .nav-links a::before {
+    content: counter(nav-item, decimal-leading-zero);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--lime);
+    opacity: 0.8;
+    min-width: 22px;
   }
 
   .subpage-nav .nav-links a:hover {
-    color: var(--rust);
+    color: var(--paper);
+    gap: 20px;
   }
 
   .subpage-nav .nav-links.is-open {
     transform: translateX(0);
+  }
+
+  /* Backdrop overlay behind the side-panel drawer */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(24, 32, 29, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 99;
+    animation: fadeIn 0.25s ease;
   }
 
   /* Touch Target Optimizations */
