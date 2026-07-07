@@ -308,6 +308,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
   const [lightbox, setLightbox] = useState(null); // { images: [], index: 0 }
   const touchStartX = useRef(null);
 
@@ -325,6 +326,30 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  // Sticky glass nav: track scroll position
+  useEffect(() => {
+    const onScroll = () => setNavScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Scroll reveal: animate elements with class 'reveal' into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target); // animate once
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [currentPage, selectedProject]);
 
   const navigateTo = (page) => {
     setCurrentPage(page);
@@ -856,7 +881,7 @@ export default function App() {
   return (
     <div className="page-shell">
       <header className="hero">
-        <nav className="nav" aria-label="Primary">
+        <nav className={`nav${navScrolled ? ' nav--scrolled' : ''}`} aria-label="Primary">
           <a className="brand" href="#top" aria-label="Kaytech home">
             <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
           </a>
@@ -919,7 +944,7 @@ export default function App() {
       <main className="main-flow">
         <section className="stats-section" aria-label="Kaytech numbers">
           {stats.map((item) => (
-            <div key={item.label} className="stat-card">
+            <div key={item.label} className="stat-card reveal">
               <strong><CountUp value={item.value} /></strong>
               <span>{item.label}</span>
             </div>
@@ -942,13 +967,13 @@ export default function App() {
         </section>
 
         <section className="section capability-section">
-          <div className="section-heading">
+          <div className="section-heading reveal">
             <p className="eyebrow">Build range</p>
             <h2>From campus blocks to custom homes.</h2>
           </div>
           <div className="capability-grid">
             {capabilities.map((capability) => (
-              <article key={capability.title} className="capability-card">
+              <article key={capability.title} className="capability-card reveal">
                 <h3>{capability.title}</h3>
                 <p>{capability.text}</p>
               </article>
@@ -957,7 +982,7 @@ export default function App() {
         </section>
 
         <section id="work" className="section portals-section">
-          <div className="section-heading split-heading">
+          <div className="section-heading split-heading reveal">
             <div>
               <p className="eyebrow">Our Portfolio Divisions</p>
               <h2>Segregated by project scope.</h2>
@@ -969,7 +994,7 @@ export default function App() {
 
           <div className="portals-grid">
             {/* Commercial Portal Card */}
-            <article className="portal-card" onClick={() => navigateTo('commercial')}>
+            <article className="portal-card reveal" onClick={() => navigateTo('commercial')}>
               <div className="portal-card-bg">COM</div>
               <div className="portal-header">
                 <p className="eyebrow">Division 01</p>
@@ -997,7 +1022,7 @@ export default function App() {
             </article>
 
             {/* Residential Portal Card */}
-            <article className="portal-card residential-portal" onClick={() => navigateTo('residential')}>
+            <article className="portal-card residential-portal reveal" onClick={() => navigateTo('residential')}>
               <div className="portal-card-bg">RES</div>
               <div className="portal-header">
                 <p className="eyebrow">Division 02</p>
@@ -1027,7 +1052,7 @@ export default function App() {
         </section>
 
         <section className="section about-section">
-          <div className="about-copy">
+          <div className="about-copy reveal">
             <p className="eyebrow">About Kaytech</p>
             <h2>New company, seasoned hands.</h2>
             <p>
@@ -1037,7 +1062,7 @@ export default function App() {
               Explore Our Core Values & Policies
             </a>
           </div>
-          <div className="ledger">
+          <div className="ledger reveal">
             <div><span>Established</span><strong>2023</strong></div>
             <div><span>Head office</span><strong>Chennai</strong></div>
             <div><span>Engineers</span><strong>30+</strong></div>

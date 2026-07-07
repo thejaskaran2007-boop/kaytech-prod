@@ -91,7 +91,48 @@ input:focus-visible {
   max-width: 1220px;
   margin: 0 auto;
   padding: 10px 0;
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
 }
+
+/* Sticky glass header — activated when user scrolls down */
+.nav--scrolled {
+  position: sticky;
+  top: 0;
+  background: rgba(24, 32, 29, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 24px rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 8px 8px;
+  max-width: 100%;
+  padding: 8px clamp(18px, 4vw, 56px);
+  margin: 0;
+  z-index: 200;
+}
+
+/* =====================
+   SCROLL REVEAL SYSTEM
+   ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger for sibling items in grids */
+.reveal:nth-child(2) { transition-delay: 0.09s; }
+.reveal:nth-child(3) { transition-delay: 0.18s; }
+.reveal:nth-child(4) { transition-delay: 0.27s; }
+.reveal:nth-child(5) { transition-delay: 0.36s; }
+.reveal:nth-child(6) { transition-delay: 0.42s; }
+
+
 
 .brand {
   display: inline-flex;
