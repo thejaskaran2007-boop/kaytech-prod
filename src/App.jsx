@@ -99,8 +99,8 @@ const projects = [
     title: 'Sandhiya College of Nursing Campus',
     location: 'Sandhiya Nursing College',
     division: 'commercial',
-    description: 'A completed nursing college block with a glazed entry, brick academic facade, shaded metal screens, and campus-ready external development.',
-    image: '/gallery/sandhiya-nursing-diagonal.jpg.png',
+    description: 'A completed nursing college campus featuring a grand glazed entry, contemporary double-height glass lobby, custom wave-patterned side facades, and a highly spacious multi-level circular interior gallery.',
+    image: '/gallery/sandhiya-nursing-exterior.jpg',
     status: 'Completed',
     meta: [
       { label: 'Project type', value: 'Nursing college campus' },
@@ -109,9 +109,9 @@ const projects = [
       { label: 'Status', value: 'Completed' },
     ],
     details: [
-      'Institutional academic block with a contemporary brick and concrete exterior',
-      'Glazed entrance lobby with canopy, front steps, and clear arrival zone',
-      'Metal screening and window grill work completed across the facade',
+      'Institutional academic block with a contemporary glass and concrete wave-pattern facade',
+      'Glazed multi-story entrance lobby with canopy, pillars, and clear arrival zone',
+      'Spacious circular multi-level interior gallery with continuous safety railings and vaulted ceiling',
       'External paving, campus frontage, and circulation areas prepared for daily use',
       'Durable finish palette suited for a nursing college environment',
       'Delivered as a polished educational facility ready for occupation',
@@ -122,6 +122,8 @@ const projects = [
       'Final finishing and campus-ready handover',
     ],
     gallery: [
+      '/gallery/sandhiya-nursing-exterior.jpg',
+      '/gallery/sandhiya-nursing-interior.jpg',
       '/gallery/sandhiya-nursing-diagonal.jpg.png',
       '/gallery/sandhiya-nursing-front.jpg.jpeg',
     ],
@@ -306,10 +308,22 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeLightboxImage, setActiveLightboxImage] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActiveLightboxImage(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const navigateTo = (page) => {
     setCurrentPage(page);
     setMobileMenuOpen(false);
+    setActiveLightboxImage(null);
     window.scrollTo(0, 0);
   };
 
@@ -393,7 +407,12 @@ export default function App() {
           <div className="gallery-grid">
             {selectedProject.gallery.map((image, index) => (
               <figure key={image} className="gallery-card">
-                <img src={image} alt={`${selectedProject.title} view ${index + 1}`} />
+                <img 
+                  src={image} 
+                  alt={`${selectedProject.title} view ${index + 1}`} 
+                  className="lightbox-trigger"
+                  onClick={() => setActiveLightboxImage(image)}
+                />
               </figure>
             ))}
           </div>
@@ -421,6 +440,21 @@ export default function App() {
             </div>
           </aside>
         </main>
+
+        {activeLightboxImage && (
+          <div className="lightbox-overlay" onClick={() => setActiveLightboxImage(null)}>
+            <button 
+              className="lightbox-close" 
+              onClick={() => setActiveLightboxImage(null)} 
+              aria-label="Close image lightbox"
+            >
+              &times;
+            </button>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <img src={activeLightboxImage} alt="Expanded view" />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -462,7 +496,12 @@ export default function App() {
         </header>
 
         <div className="about-hero-image">
-          <img src="/gallery/about-concrete.jpg" alt="Active structural concrete slab casting site" />
+          <img 
+            src="/gallery/about-concrete.jpg" 
+            alt="Active structural concrete slab casting site" 
+            className="lightbox-trigger"
+            onClick={() => setActiveLightboxImage("/gallery/about-concrete.jpg")}
+          />
         </div>
 
         <main className="subpage-content about-page-content">
@@ -488,7 +527,12 @@ export default function App() {
             </div>
 
             <div className="about-column about-story-photo-wrap">
-              <img src="/gallery/about-masonry.jpg" alt="Active site masonry and bricklaying work by Kaytech crew" className="about-story-photo" />
+              <img 
+                src="/gallery/about-masonry.jpg" 
+                alt="Active site masonry and bricklaying work by Kaytech crew" 
+                className="about-story-photo lightbox-trigger" 
+                onClick={() => setActiveLightboxImage("/gallery/about-masonry.jpg")}
+              />
             </div>
           </section>
 
@@ -526,6 +570,21 @@ export default function App() {
             </div>
           </section>
         </main>
+
+        {activeLightboxImage && (
+          <div className="lightbox-overlay" onClick={() => setActiveLightboxImage(null)}>
+            <button 
+              className="lightbox-close" 
+              onClick={() => setActiveLightboxImage(null)} 
+              aria-label="Close image lightbox"
+            >
+              &times;
+            </button>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <img src={activeLightboxImage} alt="Expanded view" />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -805,8 +864,18 @@ export default function App() {
         </div>
 
         <div className="hero-photo-strip" aria-label="Completed campus images">
-          <img src="/gallery/front.jpg.png" alt="Sri Chaitanya Techno School front elevation" />
-          <img src="/gallery/outside.png" alt="School campus entrance with steel canopy" />
+          <img 
+            src="/gallery/front.jpg.png" 
+            alt="Sri Chaitanya Techno School front elevation" 
+            className="lightbox-trigger"
+            onClick={() => setActiveLightboxImage("/gallery/front.jpg.png")}
+          />
+          <img 
+            src="/gallery/outside.png" 
+            alt="School campus entrance with steel canopy" 
+            className="lightbox-trigger"
+            onClick={() => setActiveLightboxImage("/gallery/outside.png")}
+          />
         </div>
       </header>
 
@@ -982,6 +1051,21 @@ export default function App() {
           <p>© 2026 Kaytech Constructions. All rights reserved.</p>
         </div>
       </footer>
+
+      {activeLightboxImage && (
+        <div className="lightbox-overlay" onClick={() => setActiveLightboxImage(null)}>
+          <button 
+            className="lightbox-close" 
+            onClick={() => setActiveLightboxImage(null)} 
+            aria-label="Close image lightbox"
+          >
+            &times;
+          </button>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img src={activeLightboxImage} alt="Expanded view" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
