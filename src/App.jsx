@@ -341,11 +341,12 @@ export default function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target); // animate once
+          } else {
+            entry.target.classList.remove('is-visible');
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -45px 0px' }
     );
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
@@ -435,7 +436,7 @@ export default function App() {
         </header>
 
         <main className="gallery-details">
-          <div className="gallery-grid">
+          <div className="gallery-grid reveal">
             {selectedProject.gallery.map((image, index) => (
               <figure key={image} className="gallery-card">
                 <img 
@@ -529,7 +530,7 @@ export default function App() {
             </button>
           </div>
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
-          <div className="subpage-title-grid">
+          <div className="subpage-title-grid reveal">
             <div>
               <p className="eyebrow">About Us</p>
               <h1>Seasoned hands, clean handovers.</h1>
@@ -673,7 +674,7 @@ export default function App() {
             </button>
           </div>
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
-          <div className="subpage-title-grid">
+          <div className="subpage-title-grid reveal">
             <div>
               <p className="eyebrow">Get in touch</p>
               <h1>Start the conversation.</h1>
@@ -685,7 +686,7 @@ export default function App() {
         </header>
 
         <main className="subpage-content contact-page-content">
-          <div className="contact-page-grid">
+          <div className="contact-page-grid reveal">
             {/* Left Column: Form */}
             <div className="contact-form-card">
               <h2>Submit Enquiry</h2>
@@ -777,7 +778,7 @@ export default function App() {
             </button>
           </div>
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
-          <div className="subpage-title-grid">
+          <div className="subpage-title-grid reveal">
             <div>
               <p className="eyebrow">Division: Commercial & Institutional</p>
               <h1>Built for scale.</h1>
@@ -839,7 +840,7 @@ export default function App() {
             </button>
           </div>
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
-          <div className="subpage-title-grid">
+          <div className="subpage-title-grid reveal">
             <div>
               <p className="eyebrow">Division: Residential Builds</p>
               <h1>Future Living.</h1>
@@ -881,7 +882,7 @@ export default function App() {
   return (
     <div className="page-shell">
       <header className="hero">
-        <nav className={`nav${navScrolled ? ' nav--scrolled' : ''}`} aria-label="Primary">
+        <nav className="nav" aria-label="Primary">
           <a className="brand" href="#top" aria-label="Kaytech home">
             <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
           </a>
@@ -1113,6 +1114,15 @@ export default function App() {
           <p>© 2026 Kaytech Constructions. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <div className={`fab-container ${navScrolled ? 'is-visible' : ''}`}>
+        <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="fab-btn fab-whatsapp" aria-label="Chat on WhatsApp">
+          <svg className="fab-icon" viewBox="0 0 24 24">
+            <path d="M12.031 2C6.495 2 2 6.495 2 12.031c0 1.956.551 3.864 1.597 5.539L2.152 22l4.577-1.189A9.972 9.972 0 0012.031 22c5.536 0 10.031-4.495 10.031-10.031S17.567 2 12.031 2zm5.545 14.51c-.266.75-1.503 1.458-2.073 1.543-.57.085-1.332.227-3.95-1.074-3.155-1.57-5.184-4.801-5.342-5.01-.158-.21-1.272-1.688-1.272-3.218 0-1.53.791-2.28 1.074-2.573.283-.294.615-.367.821-.367.206 0 .411.002.595.011.196.01.458-.077.717.545.266.634.908 2.215.987 2.373.08.158.132.342.026.553-.105.21-.158.342-.316.526-.158.184-.332.395-.474.526-.158.145-.326.305-.145.616.181.31 .805 1.328 1.733 2.153 1.2.106 1.734.78 1.969.98.234.2.455.19.626.046.171-.144.737-.856.935-1.15.197-.294.395-.245.679-.139.284.106 1.795.845 2.103 1.002.308.157.513.235.587.366.074.13.074.757-.192 1.507z"/>
+          </svg>
+        </a>
+      </div>
 
       {lightbox && (
         <div
