@@ -460,9 +460,15 @@ export default function App() {
   const renderHeader = () => {
     return (
       <nav className="nav" aria-label="Primary">
-        <a className="brand" href="#top" aria-label="Kaytech home" onClick={(e) => { e.preventDefault(); navigateTo('home'); }}>
-          <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
-        </a>
+        {currentPage === 'home' ? (
+          <a className="brand" href="#top" aria-label="Kaytech home">
+            <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
+          </a>
+        ) : (
+          <button className="subpage-back" onClick={() => navigateTo('home')}>
+            ← Back to Home
+          </button>
+        )}
         {renderNavLinks()}
         <button 
           className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
