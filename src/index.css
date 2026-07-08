@@ -107,6 +107,7 @@ input:focus-visible {
   padding: 8px clamp(18px, 4vw, 56px);
   margin: 0;
   z-index: 200;
+  color: var(--paper) !important;
 }
 
 /* =====================
@@ -162,14 +163,29 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: clamp(12px, 2vw, 26px);
-  color: rgba(243, 242, 236, 0.78);
+  color: inherit;
   font-size: 0.88rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 
-.nav-links a:hover {
-  color: var(--lime);
+.nav-links a {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+/* Default hover/active style for light backgrounds (subpages when not scrolled) */
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rust);
+}
+
+/* Hover/active style on dark backgrounds (scrolled header or hero header) */
+.hero .nav-links a:hover,
+.hero .nav-links a.active,
+.nav--scrolled .nav-links a:hover,
+.nav--scrolled .nav-links a.active {
+  color: var(--lime) !important;
 }
 
 .hero-grid {
@@ -232,6 +248,7 @@ h2 {
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
+  color: var(--ink);
 }
 
 h1 {
@@ -247,9 +264,33 @@ h2 {
   line-height: 0.88;
 }
 
+h3,
+h4,
+h5,
+h6 {
+  color: var(--ink);
+}
+
 h3 {
   font-size: clamp(1.15rem, 2vw, 1.55rem);
   line-height: 1;
+}
+
+/* Ensure headings inside dark sections remain readable */
+.hero h1,
+.footer h2,
+.project-details h2,
+.policy-card h3,
+.contact-form-card h2,
+.residential-inquiry-box h3,
+.coming-soon-info h2 {
+  color: var(--paper);
+}
+
+/* Eyebrows on light backgrounds */
+.main-flow .eyebrow,
+.subpage-container .eyebrow {
+  color: var(--rust);
 }
 
 .hero-copy {

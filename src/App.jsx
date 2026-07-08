@@ -194,6 +194,40 @@ const projects = [
     ],
   },
   {
+    title: 'Sri Chaitanya Techno School - Pallavaram 2 Campus',
+    location: 'Pallavaram, Chennai',
+    division: 'commercial',
+    description: 'A modern multi-level institutional school campus featuring spacious circular courtyards, secure balconies, covered landscaped turf zones, and clean academic blocks.',
+    image: '/gallery/pallavaram-chaitanya-5.jpg',
+    status: 'Completed',
+    meta: [
+      { label: 'Project type', value: 'Institutional Campus' },
+      { label: 'Client', value: 'Sri Chaitanya Techno School' },
+      { label: 'Location', value: 'Pallavaram, Chennai' },
+      { label: 'Status', value: 'Completed' },
+    ],
+    details: [
+      'Multi-story academic block with contemporary exterior facade and branding',
+      'Spacious indoor central courtyard for student assemblies and circulation',
+      'Secure circular balconies with continuous safety railings and vaulted ceilings',
+      'Covered outdoor courtyard with artificial turf landscaping and green accent walls',
+      'Finished interior corridors with custom directory signage, safety fittings, and durable tile flooring',
+      'Completed civil, structural, finishing, electrical, and plumbing works',
+    ],
+    scope: [
+      'Civil construction and turnkey structural execution',
+      'Signage, safety systems installation, and corridor finishing',
+      'Landscape development and artificial turf courtyard installation',
+    ],
+    gallery: [
+      '/gallery/pallavaram-chaitanya-5.jpg',
+      '/gallery/pallavaram-chaitanya-1.jpg',
+      '/gallery/pallavaram-chaitanya-2.jpg',
+      '/gallery/pallavaram-chaitanya-3.jpg',
+      '/gallery/pallavaram-chaitanya-4.jpg',
+    ],
+  },
+  {
     title: 'Nolabur Villa',
     location: 'Nolabur, Chennai',
     division: 'residential',
@@ -308,7 +342,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [navScrolled, setNavScrolled] = useState(false);
   const [lightbox, setLightbox] = useState(null); // { images: [], index: 0 }
   const touchStartX = useRef(null);
 
@@ -327,12 +360,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Sticky glass nav: track scroll position
-  useEffect(() => {
-    const onScroll = () => setNavScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Scroll reveal: animate elements with class 'reveal' into view
   useEffect(() => {
@@ -361,6 +388,117 @@ export default function App() {
 
   const [footerFormStatus, setFooterFormStatus] = useState({ state: 'idle', message: '' });
   const [residentialFormStatus, setResidentialFormStatus] = useState({ state: 'idle', message: '' });
+
+  const renderNavLinks = () => {
+    return (
+      <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
+        <a 
+          href="#about" 
+          className={currentPage === 'about' ? 'active' : ''} 
+          onClick={(e) => { e.preventDefault(); navigateTo('about'); }}
+        >
+          About Us
+        </a>
+        <a 
+          href="#commercial" 
+          className={currentPage === 'commercial' ? 'active' : ''} 
+          onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}
+        >
+          Commercial
+        </a>
+        <a 
+          href="#residential" 
+          className={currentPage === 'residential' ? 'active' : ''} 
+          onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}
+        >
+          Residential
+        </a>
+        <a 
+          href="#contact" 
+          className={currentPage === 'contact' ? 'active' : ''} 
+          onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}
+        >
+          Contact
+        </a>
+      </div>
+    );
+  };
+
+  const renderHeader = () => {
+    return (
+      <nav className="nav" aria-label="Primary">
+        <a className="brand" href="#top" aria-label="Kaytech home" onClick={(e) => { e.preventDefault(); navigateTo('home'); }}>
+          <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
+        </a>
+        {renderNavLinks()}
+        <button 
+          className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          <span className="hamburger-box">
+            <span className="hamburger-inner"></span>
+          </span>
+        </button>
+      </nav>
+    );
+  };
+
+  const renderFooter = (showForm = true) => {
+    return (
+      <footer id="contact" className="footer" style={{ marginTop: '5rem' }}>
+        <div>
+          <img className="footer-logo" src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
+          <p className="eyebrow">Start the conversation</p>
+          <h2>Bring the site, scope, or first sketch.</h2>
+        </div>
+        {showForm ? (
+          <form className="contact-form" onSubmit={(e) => handleSubmitForm(e, 'footer')}>
+            <input type="text" name="name" placeholder="Your name" aria-label="Your name" required />
+            <input type="email" name="email" placeholder="Email address" aria-label="Email address" required />
+            <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
+            <button type="submit" className="btn btn-primary" disabled={footerFormStatus.state === 'submitting'}>
+              {footerFormStatus.state === 'submitting' ? 'Sending...' : 'Request a call'}
+            </button>
+            {footerFormStatus.message && (
+              <p className={`form-feedback ${footerFormStatus.state}`}>
+                {footerFormStatus.message}
+              </p>
+            )}
+          </form>
+        ) : (
+          <div className="footer-right-placeholder" style={{ color: 'rgba(243, 242, 236, 0.7)', fontSize: '1.05rem', lineHeight: '1.6', alignSelf: 'center' }}>
+            <p style={{ margin: 0, fontStyle: 'italic' }}>
+              Have questions, layouts, or customized specs? Send an email or call us directly. Our engineering team responds within 24 hours.
+            </p>
+          </div>
+        )}
+        <div className="footer-contact">
+          <div className="footer-links">
+            <a className="footer-email" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
+            <a href="tel:+919444418100">+91 94444 18100</a>
+            <a href="tel:+919962718100">+91 99627 18100</a>
+          </div>
+          <a
+            className="footer-address-link"
+            href="https://maps.google.com/?q=Ground+Floor,+Sri+balaji+flats,+No.3,+Ganga+Garden,+Street,+Keelkattalai,+Chennai,+Tamil+Nadu+600117"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px', flexShrink: 0 }}>
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            Ground Floor, Sri balaji flats, No.3, Ganga Garden, Street, Keelkattalai, Chennai, Tamil Nadu 600117
+          </a>
+        </div>
+        <div className="footer-copyright">
+          <p>© 2026 Kaytech Constructions. All rights reserved.</p>
+        </div>
+      </footer>
+    );
+  };
 
   const handleSubmitForm = async (e, formType) => {
     e.preventDefault();
@@ -509,26 +647,7 @@ export default function App() {
     return (
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
-          <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => navigateTo('home')}>
-              ← Back to Home
-            </button>
-            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
-              <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
-              <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
-            </div>
-            <button 
-              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              <span className="hamburger-box">
-                <span className="hamburger-inner"></span>
-              </span>
-            </button>
-          </div>
+          {renderHeader()}
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid reveal">
             <div>
@@ -616,6 +735,7 @@ export default function App() {
             </div>
           </section>
         </main>
+        {renderFooter(true)}
 
         {lightbox && (
           <div
@@ -653,26 +773,7 @@ export default function App() {
     return (
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
-          <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => navigateTo('home')}>
-              ← Back to Home
-            </button>
-            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
-              <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
-              <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
-              <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
-            </div>
-            <button 
-              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              <span className="hamburger-box">
-                <span className="hamburger-inner"></span>
-              </span>
-            </button>
-          </div>
+          {renderHeader()}
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid reveal">
             <div>
@@ -748,6 +849,7 @@ export default function App() {
             </div>
           </div>
         </main>
+        {renderFooter(false)}
       </div>
     );
   }
@@ -757,26 +859,7 @@ export default function App() {
     return (
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
-          <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => navigateTo('home')}>
-              ← Back to Home
-            </button>
-            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
-              <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
-              <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
-            </div>
-            <button 
-              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              <span className="hamburger-box">
-                <span className="hamburger-inner"></span>
-              </span>
-            </button>
-          </div>
+          {renderHeader()}
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid reveal">
             <div>
@@ -810,6 +893,7 @@ export default function App() {
             ))}
           </div>
         </main>
+        {renderFooter(true)}
       </div>
     );
   }
@@ -819,26 +903,7 @@ export default function App() {
     return (
       <div className="page-shell subpage-container">
         <header className="subpage-header-wrap">
-          <div className="subpage-nav">
-            <button className="subpage-back" onClick={() => navigateTo('home')}>
-              ← Back to Home
-            </button>
-            <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
-              <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
-              <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
-            </div>
-            <button 
-              className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              <span className="hamburger-box">
-                <span className="hamburger-inner"></span>
-              </span>
-            </button>
-          </div>
+          {renderHeader()}
           {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
           <div className="subpage-title-grid reveal">
             <div>
@@ -874,6 +939,7 @@ export default function App() {
 
           
         </main>
+        {renderFooter(true)}
       </div>
     );
   }
@@ -882,27 +948,7 @@ export default function App() {
   return (
     <div className="page-shell">
       <header className="hero">
-        <nav className="nav" aria-label="Primary">
-          <a className="brand" href="#top" aria-label="Kaytech home">
-            <img src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
-          </a>
-          <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
-            <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About Us</a>
-            <a href="#commercial" onClick={(e) => { e.preventDefault(); navigateTo('commercial'); }}>Commercial</a>
-            <a href="#residential" onClick={(e) => { e.preventDefault(); navigateTo('residential'); }}>Residential</a>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); navigateTo('contact'); }}>Contact</a>
-          </div>
-          <button 
-            className={`mobile-menu-toggle ${mobileMenuOpen ? 'is-active' : ''}`} 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            <span className="hamburger-box">
-              <span className="hamburger-inner"></span>
-            </span>
-          </button>
-        </nav>
+        {renderHeader()}
         {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
 
         <div className="hero-grid" id="top">
@@ -1072,48 +1118,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer id="contact" className="footer">
-        <div>
-          <img className="footer-logo" src="/gallery/kaytech-logo.jpg.png" alt="Kaytech" />
-          <p className="eyebrow">Start the conversation</p>
-          <h2>Bring the site, scope, or first sketch.</h2>
-        </div>
-        <form className="contact-form" onSubmit={(e) => handleSubmitForm(e, 'footer')}>
-          <input type="text" name="name" placeholder="Your name" aria-label="Your name" required />
-          <input type="email" name="email" placeholder="Email address" aria-label="Email address" required />
-          <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
-          <button type="submit" className="btn btn-primary" disabled={footerFormStatus.state === 'submitting'}>
-            {footerFormStatus.state === 'submitting' ? 'Sending...' : 'Request a call'}
-          </button>
-          {footerFormStatus.message && (
-            <p className={`form-feedback ${footerFormStatus.state}`}>
-              {footerFormStatus.message}
-            </p>
-          )}
-        </form>
-        <div className="footer-contact">
-          <div className="footer-links">
-            <a className="footer-email" href="mailto:kaytech422@gmail.com">kaytech422@gmail.com</a>
-            <a href="tel:+919444418100">+91 94444 18100</a>
-            <a href="tel:+919962718100">+91 99627 18100</a>
-          </div>
-          <a
-            className="footer-address-link"
-            href="https://maps.google.com/?q=Ground+Floor,+Sri+balaji+flats,+No.3,+Ganga+Garden,+Street,+Keelkattalai,+Chennai,+Tamil+Nadu+600117"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px', flexShrink: 0 }}>
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            Ground Floor, Sri balaji flats, No.3, Ganga Garden, Street, Keelkattalai, Chennai, Tamil Nadu 600117
-          </a>
-        </div>
-        <div className="footer-copyright">
-          <p>© 2026 Kaytech Constructions. All rights reserved.</p>
-        </div>
-      </footer>
+      {renderFooter(true)}
 
 
 
