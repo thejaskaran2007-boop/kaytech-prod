@@ -392,7 +392,30 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+  // Handle URL hash changes for routing and 404 fallbacks
+  useEffect(() => {
+    const VALID_PAGES = ['home', 'about', 'commercial', 'residential', 'contact'];
+    const HOMEPAGE_ANCHORS = ['work', 'method', 'top'];
 
+    const handleHashRouting = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (!hash) {
+        setCurrentPage('home');
+      } else if (VALID_PAGES.includes(hash)) {
+        setCurrentPage(hash);
+      } else if (HOMEPAGE_ANCHORS.includes(hash)) {
+        setCurrentPage('home');
+      } else {
+        setCurrentPage('404');
+      }
+    };
+
+    // Run on initial load
+    handleHashRouting();
+
+    window.addEventListener('hashchange', handleHashRouting);
+    return () => window.removeEventListener('hashchange', handleHashRouting);
+  }, []);
 
   // Scroll reveal: animate elements with class 'reveal' into view
   useEffect(() => {
@@ -413,9 +436,9 @@ export default function App() {
   }, [currentPage, selectedProject]);
 
   const navigateTo = (page) => {
-    setCurrentPage(page);
     setMobileMenuOpen(false);
     setLightbox(null);
+    window.location.hash = page === 'home' ? '' : page;
     window.scrollTo(0, 0);
   };
 
@@ -677,6 +700,32 @@ export default function App() {
             )}
           </div>
         )}
+      </div>
+    );
+  }
+
+  // Subpage: 404 Page Not Found
+  if (currentPage === '404') {
+    return (
+      <div className="page-shell subpage-container error-404-container">
+        <header className="subpage-header-wrap">
+          {renderHeader()}
+          {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
+        </header>
+
+        <main className="subpage-content error-404-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '60px 0', minHeight: '50vh' }}>
+          <div className="error-404-card reveal" style={{ maxWidth: '580px', background: 'var(--steel)', color: 'var(--paper)', padding: '40px clamp(20px, 5vw, 48px)', boxShadow: '10px 10px 0 var(--rust)' }}>
+            <p className="eyebrow" style={{ color: 'var(--lime)', marginBottom: '12px' }}>Error 404 / Missing Site</p>
+            <h3 className="subpage-title" style={{ fontFamily: 'Impact, "Arial Black", sans-serif', textTransform: 'uppercase', color: 'var(--paper)', fontSize: 'clamp(2.2rem, 5vw, 4rem)', lineHeight: '0.9', margin: '0 0 16px' }}>Blueprint Missing.</h3>
+            <p className="error-text" style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)', lineHeight: '1.6', marginBottom: '24px', opacity: 0.9 }}>
+              The structure or layout you are looking for does not exist, has been relocated, or is currently out of scope. Let's get you back to safe scaffolding.
+            </p>
+            <button className="btn btn-primary" onClick={() => navigateTo('home')}>
+              ← Return to Active Site
+            </button>
+          </div>
+        </main>
+        {renderFooter(true)}
       </div>
     );
   }
