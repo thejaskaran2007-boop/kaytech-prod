@@ -1036,6 +1036,17 @@ export default function App() {
   return (
     <div className="page-shell">
       <header className="hero">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="hero-video"
+          poster="/gallery/outside.png"
+        >
+          <source src="/gallery/hero-bg.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         {renderHeader()}
         {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
 
