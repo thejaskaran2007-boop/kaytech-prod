@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const stats = [
   { value: '30+', label: 'years of site leadership' },
@@ -377,23 +377,6 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState(null); // { images: [], index: 0 }
   const touchStartX = useRef(null);
-
-  const heroSlides = useMemo(() => [
-    '/gallery/outside.png',
-    '/gallery/pallavaram-chaitanya-5.jpg',
-    '/gallery/hari-prasath-3.jpg',
-    '/gallery/front.jpg.png',
-    '/gallery/hari-prasath-1.jpg'
-  ], []);
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const slideTimer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
-    return () => clearInterval(slideTimer);
-  }, [heroSlides.length]);
 
   const openLightbox = (images, index) => setLightbox({ images, index });
   const closeLightbox = () => setLightbox(null);
@@ -1053,15 +1036,17 @@ export default function App() {
   return (
     <div className="page-shell">
       <header className="hero">
-        <div className="hero-slideshow">
-          {heroSlides.map((slide, index) => (
-            <div 
-              key={slide}
-              className={`hero-slide ${index === currentSlide ? 'is-active' : ''}`}
-              style={{ backgroundImage: `url(${slide})` }}
-            />
-          ))}
-        </div>
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="hero-video"
+          poster="/gallery/outside.png"
+        >
+          <source src="/gallery/hero-bg.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         {renderHeader()}
         {mobileMenuOpen && <div className="nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
 
